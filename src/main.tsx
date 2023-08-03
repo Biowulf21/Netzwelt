@@ -1,17 +1,12 @@
 import React from 'react';
-import ReactDOM from 'react-dom'; // Correct import
+import { createRoot } from 'react-dom/client'; // Use createRoot instead of ReactDOM
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
-import { AuthProvider } from './features/authorization/hooks/auth_context';
 
-ReactDOM.render(
+createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <AuthProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </AuthProvider>
-  </React.StrictMode>,
-  document.getElementById('root')
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>
 );
-
