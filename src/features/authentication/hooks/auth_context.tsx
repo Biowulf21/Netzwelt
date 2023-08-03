@@ -1,4 +1,4 @@
-import React, { useState, createContext, ReactNode } from "react";
+import React, { useState, createContext, ReactNode, useContext } from "react";
 
 interface AuthContextType {
   token: string;
@@ -7,11 +7,13 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
+export const useAuth() => useContext(AuthContext);
+
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [token, setToken] = useState<string>("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
-    <AuthContext.Provider value={{ token, setToken }}>
+    <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
       {children}
     </AuthContext.Provider>
   );
