@@ -1,23 +1,25 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import "./signup.css";
+import useLogin from "../../hooks/use_login";
 
 export default function SignupPage() {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleUsernameChange = (e: React.FormEvent<HTMLFormElement>) => {
-    console.log(e.target.value);
-  };
+  const
+    { data, error, isLoading, login } = useLogin()
 
-  const handlePasswordChange = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleUsernameChange = (e: ChangeEvent<HTMLInputElement>) =>
+    setUsername(e.target.value);
+
+  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) =>
     setPassword(e.target.value);
-  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // You can add your login logic here.
-    console.log("Login submitted!");
+    login({ username, password });
   };
   return (
     <>
